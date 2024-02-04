@@ -1,10 +1,10 @@
 const { User, Thought } = require('../models');
 
-const checkUser = () => {
+const checkUser = (user) => {
     if (!user) {
         return res.status(404).json({ message: 'No user with that ID' })
     };
-}
+};
 
 module.exports = {
 
@@ -24,7 +24,7 @@ module.exports = {
                 .populate("friends")
                 .select("-__v");
     
-            checkUser();
+            checkUser(user);
     
             res.json(user);
         } catch (err) {
@@ -49,7 +49,7 @@ module.exports = {
                 { runValidators: true, new: true }
             );
 
-            checkUser();
+            checkUser(user);
     
             res.json(user);
         } catch (err) {
@@ -61,7 +61,7 @@ module.exports = {
         try {
             const user = await User.findOneAndRemove({ _id: req.params.userId });
     
-            checkUser();
+            checkUser(user);
 
             await Thought.deleteMany({ _id: { $in: user.thoughts } });
     
@@ -79,7 +79,7 @@ module.exports = {
                 { runValidators: true, new: true }
             );
 
-            checkUser();
+            checkUser(user);
     
             res.json(user);
         } catch (err) {
@@ -95,7 +95,7 @@ module.exports = {
                 { new: true }
             );
 
-            checkUser();
+            checkUser(user);
     
             res.json(user);
         } catch (err) {
