@@ -20,7 +20,7 @@ This respoitory can be cloned. You will need mongoDB installed locally and insom
 ## Usage
 After installing, the user would open the integrated terminal from index.js in the root and 'npm run seed' and then 'npm start'. Please watch the video linked below to learn how to test the routes:
 
-
+https://drive.google.com/file/d/1kNgC3BPB4Zb4zm4kJ5AdhepQKqLzCVsP/view
 
 ## Tests
 This project was tested in insomnia by trial and error
