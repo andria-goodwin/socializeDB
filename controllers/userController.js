@@ -1,5 +1,6 @@
 const { User, Thought } = require('../models');
 
+// check if user id exists, if not throw 404
 const checkUser = (user) => {
     if (!user) {
         return res.status(404).json({ message: 'No user with that ID' })
@@ -7,7 +8,7 @@ const checkUser = (user) => {
 };
 
 module.exports = {
-
+    // get all users
     async getAllUsers(req, res) {
         try {
             const users = await User.find(); 
@@ -17,6 +18,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+    // get a single user by user id
     async getSingleUser(req, res) {
         try {
             const user = await User.findOne({ _id: req.params.userId })
@@ -32,6 +34,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+    // create a user by passing required info into the req.body
     async createUser(req, res) {
         try {
             const user = await User.create(req.body);
@@ -41,6 +44,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // update a user by user id and passing changes in req.body
     async updateUser(req, res) {
         try {
             const user = await User.findOneAndUpdate(
@@ -57,6 +61,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+    // delete a user by user id
     async deleteUser(req, res) {
         try {
             const user = await User.findOneAndDelete({ _id: req.params.userId });
@@ -71,6 +76,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // add a friend to a user by the user id and friend's user id
     async addFriend(req, res) {
         try {
             const user = await User.findOneAndUpdate(
@@ -87,6 +93,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+    // delete a friend to a user by the user id and friend's user id
     async deleteFriend(req, res) {
         try {
             const user = await User.findOneAndUpdate(

@@ -1,6 +1,7 @@
 const { Schema, Types } = require('mongoose');
 const moment = require('moment');
 
+// reaction schema -- Schema only, not a model
 const reactionSchema = new Schema(
   {
     reactionId: {
@@ -22,6 +23,7 @@ const reactionSchema = new Schema(
       get: createdAtValue => moment(createdAtValue).format("MMM DD, YYYY [at] hh:mm a"),
     },
   },
+  // getters and virtuals true
   {
     toJSON: {
       virtuals: true,

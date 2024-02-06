@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 const moment = require('moment');
 
+// thought schema to be passed into Thought model
 const thoughtSchema = new Schema(
   {
     thoughtText: {
@@ -21,6 +22,7 @@ const thoughtSchema = new Schema(
     },
     reactions: [reactionSchema],
   },
+  // getters and virtuals true
   {
     toJSON: {
       virtuals: true,
@@ -30,11 +32,13 @@ const thoughtSchema = new Schema(
   }
 );
 
+// virtual to count how many reactions a thought has
 thoughtSchema.virtual('reactionCount')
 .get(function() {
     return this.reactions.length;
 });
 
+// Thought model
 const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought;
