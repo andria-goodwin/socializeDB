@@ -1,5 +1,6 @@
 const { User, Thought } = require('../models');
 
+// check if thought id exists, if not throw 404
 const checkThought = (thought) => {
     if (!thought) {
         return res.status(404).json({ message: 'No thoughts with that ID' })
@@ -7,7 +8,7 @@ const checkThought = (thought) => {
 };
 
 module.exports = {
-
+    // get all thoughts
     async getAllThoughts(req, res) {
         try {
             const thoughts = await Thought.find(); 
@@ -17,6 +18,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+    // get single thought by thought id
     async getSingleThought(req, res) {
         try {
             const thought = await Thought.findOne({ _id: req.params.thoughtId })
@@ -30,6 +32,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+    // create a thought by passing required info into the req.body
     async createThought(req, res) {
         try {
             const thought = await Thought.create(req.body);
@@ -39,6 +42,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // update thought by thought id and passing changes in req.body
     async updateThought(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
@@ -55,6 +59,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+    // delete thought by thought id
     async deleteThought(req, res) {
         try {
             const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
@@ -67,6 +72,8 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // add a reaction to a thought by the thought id
+    // create the reaction in the req.body
     async addReaction(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
@@ -83,6 +90,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+    // delete a reaction by the thought id and reaction id
     async deleteReaction(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(

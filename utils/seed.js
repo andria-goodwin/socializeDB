@@ -26,7 +26,7 @@ const users = [
 connection.once("open", async () => {
   console.log("connected");
 
-  // Drop existing students
+  // Delete existing users
   await User.deleteMany({});
 
   // Adds seed data to database
